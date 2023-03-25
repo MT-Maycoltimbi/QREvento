@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+
+from qr_module.settings import BASE_DIR
 from .models import Profile, Eventos
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -21,6 +23,7 @@ import cv2
 import pyzbar.pyzbar as pyzbar
 from datetime import datetime
 from datetime import date
+import os
 
 
 # Create your views here.
@@ -165,7 +168,10 @@ def registro_usuario(request, nombre):
                     identificador = usu.id
             c = t == 'ya existe'
 
-            rutaCompleta = 'C:/Users/micha/Desktop/QREvento/Aplicaciones/qr/static/codigos_qr/'
+            #rutaCompleta = os.path.join(STATICFILES_DIRS, 'codigos_qr/')
+            #rutaCompleta = 'C:/Users/micha/Desktop/QREvento/Aplicaciones/qr/static/codigos_qr/'
+            rutaCompleta = os.path.join(BASE_DIR, 'Aplicaciones', 'qr', 'static', 'codigos_qr/')
+
             evento = Eventos.objects.get(name_evento=nombre)
 
             if len(evento.mi_lista) < evento.cupos:

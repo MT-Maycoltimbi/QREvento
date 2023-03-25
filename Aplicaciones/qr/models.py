@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.postgres.fields import ArrayField
+import os
+
+from qr_module.settings import BASE_DIR
 
 
 class Profile(models.Model):
@@ -47,8 +50,10 @@ class Profile(models.Model):
     ]
     info = models.CharField(max_length=30, choices=op, default='amigo')
     data = models.CharField(max_length=255)
-    imagen = models.ImageField(
-        upload_to='C:/Users/micha/Desktop/QREvento/Aplicaciones/qr/static/codigos_qr')
+    imagen = models.ImageField(upload_to=os.path.join(BASE_DIR, 'Aplicaciones', 'qr', 'static', 'codigos_qr'))
+    #imagen = models.ImageField(upload_to=os.path.join('qr', 'static', 'codigos_qr'))
+    #imagen = models.ImageField(
+        #upload_to='C:/Users/micha/Desktop/QREvento/Aplicaciones/qr/static/codigos_qr')
 
 
 class Eventos(models.Model):
@@ -66,7 +71,7 @@ class Eventos(models.Model):
     enlace = models.CharField(max_length=100)
     mi_lista = ArrayField(models.CharField(max_length=900), default=list)
     ingresos = ArrayField(models.CharField(max_length=900), default=list)
-    estado= models.CharField(max_length=50, default='activo')
+    estado = models.CharField(max_length=50, default='activo')
 
 
 @receiver(post_save, sender=User)
