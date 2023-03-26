@@ -146,8 +146,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+# CORREOS #####
 # EMAIL_HOST_USER = 'eventosqr.mm@gmail.com'
 # EMAIL_HOST_PASSWORD = 'hmtytvwhiaanbygg'
 # segundo correo si falla el primero
-EMAIL_HOST_USER = 'proyectoxr032@gmail.com'
-EMAIL_HOST_PASSWORD = 'lmnwpgbtlfddcxvd'
+# EMAIL_HOST_USER = 'proyectoxr032@gmail.com'
+# EMAIL_HOST_PASSWORD = 'lmnwpgbtlfddcxvd'
+# TERCER CORREO
+EMAIL_HOST_USER = 'eventosqr6@gmail.com'
+EMAIL_HOST_PASSWORD = 'dnypoyncowojyqzf'
