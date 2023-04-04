@@ -32,24 +32,27 @@ Form
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Cedula</th>
+
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
                                                 <th>email</th>
+                                                <th>Telefono</th>
                                                 <th>Edad</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {% for b in usuario %}
                                             {% if b.id in i.mi_lista %}
                                             <tr>
-                                                <td>{{ b.profile.cedula }}</td>
+
                                                 <td>{{ b.first_name }}</td>
                                                 <td>{{ b.last_name }}</td>
                                                 <td>{{ b.email }}</td>
+                                                <td>{{ b.profile.phone }}</td>
                                                 <td>{{ b.profile.age }}</td>
-                                                <td><a href="{% url 'gestion:eliminar' id=b.id %}"
-                                                        class="btn btn-danger btn-sm btnEliminacion">Eliminar</a></td>
+                                                <!--<td><a href="{% url 'gestion:eliminar' id=b.id %}"
+                                                        class="btn btn-danger btn-sm btnEliminacion">Eliminar</a></td> -->
                                             </tr>
                                             {% endif %}
                                             {% endfor %}

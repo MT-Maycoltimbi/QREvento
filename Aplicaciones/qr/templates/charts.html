@@ -51,7 +51,7 @@
             </div>
         </div>
 
-       <div class="grid-container text-center">
+        <div class="grid-container text-center">
             <div class="grid-item">
                 <h3>Direccion con mas asistencia a eventos:</h3>{% for envento in top3_mayor %}
                 <p>{{envento}}</p>
@@ -102,70 +102,69 @@
 
         </div>
 </section>
-
+<!--muestra diagrama de cajas-->
 <script type="application/javascript">
 
     var asis = JSON.parse('{{asistencia|safe}}');
     var ed = JSON.parse('{{edad|safe}}');
-
     Highcharts.chart('container-informe', {
-
         chart: {
-            type: 'boxplot'
+            type: 'column'
         },
-
         title: {
-            text: 'INFORME'
+            text: 'Promedio de asistencia y edad'
         },
-
-        legend: {
-            enabled: false
+        subtitle: {
+            text: 'Observaciones'
         },
-
         xAxis: {
-            categories: ['Edad', 'Asistencia'],
-            title: {
-                text: 'TABLA'
-            }
-        },
-
-        yAxis: {
-            title: {
-                text: 'Observaciones'
-            },
-            plotLines: [{
-                value: 0,
-                color: 'red',
-                width: 1,
-
-            }]
-        },
-
-        series: [{
-            name: 'Observaciones',
-            data: [
-                ed, asis
-
+            categories: [
+                'Abril',
+                'Mayo',
+                'Junio',
+                'Julio',
+                'Agosto',
+                'Septiembre',
+                'Octubre',
+                'Noviembre',
+                'Diciembre'
             ],
-            tooltip: {
-                headerFormat: '<em>Dato {point.key}</em><br/>'
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Cantidad'
             }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Edad',
+            data: ed,
+            colorIndex: 4
         }, {
-            name: 'Outliers',
-            color: Highcharts.getOptions().colors[0],
-            type: 'scatter',
+            name: 'Asistencia',
+            data: asis,
+            colorIndex: 5
 
-            marker: {
-                fillColor: 'white',
-                lineWidth: 1,
-                lineColor: Highcharts.getOptions().colors[0]
-            },
-            tooltip: {
-                pointFormat: 'Observaciones: {point.y}'
-            }
+
+
         }]
-
     });
+
 
 
     var data_h = JSON.parse('{{hombres |safe}}');

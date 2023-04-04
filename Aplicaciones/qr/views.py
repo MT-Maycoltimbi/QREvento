@@ -112,7 +112,7 @@ def editar_evento(request, id_evento):
             evento.responsable = responsable
             evento.requisitos = requisitos
             evento.contacto = contacto
-            evento.fecha_evento = fecha_evento.strftime('%d/%m/%Y')
+            evento.fecha_evento = fecha_evento
             evento.hora_evento = hora_evento
             evento.cupos = cupos
             evento.descripcion = descripcion
@@ -168,11 +168,8 @@ def registro_usuario(request, nombre):
                     identificador = usu.id
             c = t == 'ya existe'
 
-            # rutaCompleta = os.path.join(STATICFILES_DIRS, 'codigos_qr/')
-            # rutaCompleta = 'C:/Users/micha/Desktop/QREvento/Aplicaciones/qr/static/codigos_qr/'
             rutaCompleta = os.path.join(
                 BASE_DIR, 'Aplicaciones', 'qr', 'static', 'codigos_qr/')
-
             evento = Eventos.objects.get(name_evento=nombre)
 
             if len(evento.mi_lista) < evento.cupos:
@@ -288,7 +285,7 @@ def registro_usuario(request, nombre):
                     mensaje = "Bienevnido/a! " + name.upper() + " gracias por regristrate al evento: "+nombre+", realizado por el GAD Crnel. Marcelino Maridueña nos complace que hayas podido registrarte con exito. Esperamos que disfrutes de todas las actividades y experiencias que hemos preparados para ti.\n \nPara ingresar al evento debes presentar este codigo QR el dia del evento.\n Fecha - hora: " + \
                         evento.fecha_evento+" - " + evento.hora_evento + \
                         "\n Direccion: "+evento.ubicacion + "\n Responble del evento: " + evento.responsable + \
-                        "\n Requisitos:" + evento.requisitos + \
+                        "\n Requisitos: " + evento.requisitos + \
                         "\n Descripcion: " + evento.descripcion + "\n Contacto inf: 0985784567" + \
                         "\n Que tengas un excelente dia. Te esperamos"
                     email_desde = settings.EMAIL_HOST_USER
